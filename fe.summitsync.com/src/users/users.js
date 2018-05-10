@@ -40,7 +40,6 @@ export class Users {
   }
 
   closeModal() {
-    debugger;
     this.showModal = false;
   }
 }

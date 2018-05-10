@@ -21,11 +21,11 @@ const cssRules = [
   { loader: 'css-loader' },
   {
     loader: 'postcss-loader',
-    options: { plugins: () => [require('autoprefixer')({ browsers: ['last 2 versions'] })]}
+    options: { plugins: () => [require('autoprefixer')({ browsers: ['last 2 versions'] })] }
   }
 ]
 
-module.exports = ({production, server, extractCss, coverage} = {}) => ({
+module.exports = ({ production, server, extractCss, coverage } = {}) => ({
   resolve: {
     extensions: ['.js'],
     modules: [srcDir, 'node_modules'],
@@ -66,9 +66,11 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
         // because Aurelia would try to require it again in runtime
         use: cssRules,
       },
+      { test: /\.scss$/i, use: ["style-loader", "css-loader", "sass-loader"]},      
       { test: /\.html$/i, loader: 'html-loader' },
-      { test: /\.js$/i, loader: 'babel-loader', exclude: nodeModulesDir,
-        options: coverage ? { sourceMap: 'inline', plugins: [ 'istanbul' ] } : {},
+      {
+        test: /\.js$/i, loader: 'babel-loader', exclude: nodeModulesDir,
+        options: coverage ? { sourceMap: 'inline', plugins: ['istanbul'] } : {},
       },
       { test: /\.json$/i, loader: 'json-loader' },
       // use Bluebird as the global Promise implementation:
@@ -81,6 +83,9 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
       // load these fonts normally, as files:
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
+    ],
+    loaders: [
+      { test: /\.scss$/i, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!sass-loader?sourceMap') },
     ]
   },
   plugins: [

@@ -1,3 +1,4 @@
+import './modal.scss';
 import { bindable } from 'aurelia-framework';
 
 export class Modal {

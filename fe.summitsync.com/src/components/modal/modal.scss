@@ -1,0 +1,8 @@
+modal{    
+    .cover{position: fixed;z-index:999;height: 100vh;width:100vw;background: rgba(0, 0, 0, 0.3);}
+    .modal-content{
+        position: absolute;z-index: 1000;top:0;left:0;height:50vh;width:50vw;
+        header{color:#abcdef;}
+    }
+    
+}
