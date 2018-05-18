@@ -42,7 +42,7 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
     sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
     chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js',
   },
-  devServer: {
+  devServer: {   
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
     historyApiFallback: true,
@@ -66,7 +66,7 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
         // because Aurelia would try to require it again in runtime
         use: cssRules,
       },
-      { test: /\.scss$/i, use: ["style-loader", "css-loader", "sass-loader"]},      
+      { test: /\.scss$/i, use: ["style-loader", "css-loader", "sass-loader"] },
       { test: /\.html$/i, loader: 'html-loader' },
       {
         test: /\.js$/i, loader: 'babel-loader', exclude: nodeModulesDir,
@@ -87,7 +87,10 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
     loaders: [
       { test: /\.scss$/i, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!sass-loader?sourceMap') },
     ]
-  },
+  }, 
+  node: {
+    fs: "empty"
+  }, 
   plugins: [
     new AureliaPlugin(),
     new ProvidePlugin({
