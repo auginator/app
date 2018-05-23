@@ -1,0 +1,4 @@
+node_modules/
+.crossbar/key.priv
+.crossbar/key.pub
+.crossbar/node.pid
