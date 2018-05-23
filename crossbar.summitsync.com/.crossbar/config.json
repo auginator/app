@@ -58,7 +58,7 @@
         },
         {
             "type": "guest",
-            "executable": "nodejs",
+            "executable": "node",
             "arguments": [
                 "router/router.js"
             ],
